@@ -1,0 +1,5 @@
+// Created by Lexter Labra
+// Set TEAM_ID locally (Xcode > Signing) for device builds; leave empty in git. Simulator builds don't need it.
+TEAM_ID=
+BUNDLE_ID=com.lexterlabra.molemayhem
+APP_NAME=MoleMayhem

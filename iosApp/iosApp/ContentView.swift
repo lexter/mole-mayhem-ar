@@ -1,0 +1,21 @@
+// Created by Lexter Labra
+
+import ComposeApp
+import SwiftUI
+import UIKit
+
+/// Hosts the shared Compose UI. Phase 2 passes the Swift RealityKit `ArSceneController` factory in here.
+struct ComposeView: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UIViewController {
+        MainViewControllerKt.MainViewController()
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+}
+
+struct ContentView: View {
+    var body: some View {
+        ComposeView()
+            .ignoresSafeArea()
+    }
+}

@@ -1,0 +1,46 @@
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Gradle / Kotlin ---
+.gradle/
+build/
+!**/src/**/build/
+.kotlin/
+*.hprof
+captures/
+.externalNativeBuild/
+.cxx/
+
+# --- Local machine config and secrets (never commit) ---
+local.properties
+*.jks
+*.keystore
+*.p12
+*.p8
+*.mobileprovision
+keystore.properties
+secrets.properties
+google-services.json
+GoogleService-Info.plist
+
+# --- IDE ---
+.idea/
+*.iml
+.fleet/
+.vscode/
+
+# --- Xcode ---
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+DerivedData/
+iosApp/build/
+*.ipa
+*.dSYM.zip
+*.dSYM
+**/xcshareddata/WorkspaceSettings.xcsettings
+Pods/
+
+# --- Misc ---
+*.log

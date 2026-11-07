@@ -1,0 +1,17 @@
+# Created by Lexter Labra
+included:
+  - iosApp
+excluded:
+  - build
+  - DerivedData
+opt_in_rules:
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - explicit_init
+  - first_where
+  - sorted_imports
+force_unwrapping:
+  severity: error
+line_length:
+  warning: 120
+  error: 160

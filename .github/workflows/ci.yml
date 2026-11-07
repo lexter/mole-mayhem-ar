@@ -1,0 +1,79 @@
+# Created by Lexter Labra
+#
+# CI for Mole Mayhem AR.
+# - Ubuntu: ./gradlew check (detekt, ktlint, JVM tests, Kover, Android lint/unit tests) + Android debug build.
+# - macOS:  allTests (JVM + iOS simulator) and an Xcode simulator build of iosApp, plus SwiftLint.
+# Third-party actions are pinned to full commit SHAs (tag in the trailing comment).
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Gradle check + Android build (Ubuntu)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-java@77dd5b2ce225ea11469928ac317850245a74ae78 # v6.2.0
+        with:
+          distribution: zulu
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
+      - name: Check
+        run: ./gradlew check --stacktrace
+      - name: Android debug build
+        run: ./gradlew :androidApp:assembleDebug --stacktrace
+      - name: Upload reports on failure
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: gradle-reports-ubuntu
+          path: '**/build/reports/'
+          retention-days: 7
+
+  ios:
+    name: Shared tests + iOS build (macOS)
+    runs-on: macos-26
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-java@77dd5b2ce225ea11469928ac317850245a74ae78 # v6.2.0
+        with:
+          distribution: zulu
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
+      # Kotlin 2.4.21 is tested against Xcode 26.4; use that line rather than the runner default.
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_26.4.1.app/Contents/Developer
+      - name: Shared tests (JVM + iOS simulator)
+        run: ./gradlew allTests --stacktrace
+      - name: SwiftLint
+        run: |
+          brew list swiftlint >/dev/null 2>&1 || brew install swiftlint
+          cd iosApp && swiftlint lint --strict --config .swiftlint.yml
+      - name: iOS simulator build
+        run: |
+          cd iosApp
+          xcodebuild -project iosApp.xcodeproj -scheme iosApp -configuration Debug \
+            -sdk iphonesimulator -arch arm64 \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO build
+      - name: Upload reports on failure
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: gradle-reports-macos
+          path: '**/build/reports/'
+          retention-days: 7

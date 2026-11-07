@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created by Lexter Labra -->
+<resources>
+    <string name="home_title_mole">MOLE</string>
+    <string name="home_title_mayhem">MAYHEM</string>
+    <string name="home_title_ar">AR</string>
+    <string name="home_title_a11y">Mole Mayhem AR</string>
+    <string name="home_tagline">Your phone is the hammer.</string>
+    <string name="home_quick_play">QUICK PLAY</string>
+    <string name="home_game_modes">GAME MODES</string>
+    <string name="mode_arcade_solo_title">Arcade Solo</string>
+    <string name="mode_arcade_solo_subtitle">1 player · waves get faster</string>
+    <string name="mode_whack_off_title">Whack-Off</string>
+    <string name="mode_whack_off_subtitle">2–4 players · same Wi-Fi · versus</string>
+    <string name="mode_coop_title">Co-op Defense</string>
+    <string name="mode_coop_subtitle">2–4 players · protect the cake</string>
+    <string name="home_mallets">Mallets</string>
+    <string name="home_how_to_swing">How to swing</string>
+    <string name="home_join_game">Join game</string>
+    <string name="home_settings">Settings</string>
+    <string name="home_profile_a11y">Player profile: %1$s</string>
+    <!-- Placeholder until nickname entry exists (Phase 4). Not real user data. -->
+    <string name="placeholder_nickname">Lex</string>
+</resources>

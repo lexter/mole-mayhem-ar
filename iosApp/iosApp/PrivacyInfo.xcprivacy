@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Created by Lexter Labra -->
+<!--
+  Privacy manifest (https://developer.apple.com/documentation/bundleresources/privacy-manifest-files).
+  No tracking, no tracking domains, no collected data: the game is fully offline (LAN only, no accounts, no analytics).
+  Required-reason APIs:
+  - FileTimestamp 0A2A.1 and SystemBootTime 35F9.1: stat/fstat and mach_absolute_time used inside Compose Multiplatform
+    and the Kotlin/Native runtime (https://kotlinlang.org/docs/apple-privacy-manifest.html).
+  - UserDefaults CA92.1: app-only settings such as calibration and high scores (multiplatform-settings, later phases).
+  Review this file whenever a dependency or a new required-reason API is added.
+-->
+<plist version="1.0">
+<dict>
+	<key>NSPrivacyTracking</key>
+	<false/>
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array/>
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryFileTimestamp</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>0A2A.1</string>
+			</array>
+		</dict>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategorySystemBootTime</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>35F9.1</string>
+			</array>
+		</dict>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>CA92.1</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
